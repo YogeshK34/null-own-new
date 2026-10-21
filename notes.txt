@@ -1,0 +1,16 @@
+this is a simulation, however do not mention it anywhere in the UI, keep the flow as if it was real 
+right now there are no loaders, it's all sort of static, add timeouts to give the feeling of fetching 
+or creating something dynamic 
+
+where the async / loading / setTimeout behavior is needed: 
+1. Registering RWA's (it's happening too quickly)
+2. Stealth-Address creation 
+3. Transferring (keep the loading, it's good, the percentage UI is awesome)
+4. Proof Generation as well 
+
+1. Replace any wording of simulation, POC, things that say this is a demo of some kind, although not real, it doesn't have to feel 
+it that way
+
+Some Recommendations : do not add loaders like spinners, add the percentage loaders you have in Transferring logic 
+it gives app some new fresh vibes 
+
