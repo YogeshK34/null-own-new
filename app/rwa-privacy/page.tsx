@@ -280,7 +280,7 @@ export default function RWAPrivacyLandingPage() {
         <hr className="border-t-2 border-black mt-12 mb-6" />
         <footer className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">
           <div className="text-foreground">
-            NULL//OWN PRIVACY ARCHITECTURE & PROTOCOL SPECIFICATION
+            NULL OWN PRIVACY ARCHITECTURE & PROTOCOL SPECIFICATION
           </div>
           <div className="font-mono text-xs">
             NEO-BRUTALIST ARCHITECTURE • CRYPTOGRAPHIC PROTOCOL SPECIFICATION

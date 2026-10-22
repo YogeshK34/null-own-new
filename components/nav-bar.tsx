@@ -18,7 +18,7 @@ export function NavBar() {
           href="/"
           className="font-[900] text-[1.1rem] tracking-[-0.03em] uppercase bg-[#0A0A0A] text-[#FFDD00] px-2.5 py-1 border-2 border-black"
         >
-          NULL//OWN
+          NULL OWN
         </Link>
         <span className="font-[900] text-sm tracking-tight uppercase hidden sm:inline text-foreground">
           RWA PRIVACY LABS

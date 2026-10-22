@@ -3,7 +3,7 @@ import "./globals.css";
 import "./neo-brutal.css";
 
 export const metadata: Metadata = {
-  title: "Null//Own — RWA Privacy Labs",
+  title: "Null Own — RWA Privacy Labs",
   description: "Cryptographic stealth addresses & zero-knowledge proofs for Real World Assets",
 };
 

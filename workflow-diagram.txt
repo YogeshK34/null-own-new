@@ -1,0 +1,96 @@
+ Here is the structured breakdown of the project based on the instructions in workflow-diagram.txt:
+  ──────
+  ### 1. Project Name & Purpose
+
+  • Project Name: NullOwn (null-own)
+  • Purpose: NullOwn is a privacy architecture platform built to eliminate the surveillance and balance-sheet exposure vulnerabilities inherent in tokenizing Real World Assets (RWAs) on public blockchains. It delivers a privacy-
+  preserving transfer flow using non-interactive Diffie-Hellman stealth addresses and Groth16 zero-knowledge proofs (zk-SNARKs), enabling confidential asset transfers and cryptographic proof of ownership without exposing owner
+  identities.
+  ──────
+  ### 2. Tech Stack
+
+  • Languages: TypeScript, JavaScript, HTML5, CSS3
+  • Framework: Next.js 16 (App Router, React 19 Server and Client Components)
+  • Styling & Design System: Tailwind CSS v4, custom Neo-Brutalism tokens and styling (neo-brutal.css), Google Fonts (Space Grotesk, IBM Plex Mono)
+  • UI Libraries & Primitives: @base-ui/react, @radix-ui/react-slot, class-variance-authority, clsx, tailwind-merge
+  • Icons: lucide-react
+  • Cryptographic & Protocol Primitives: In-browser cryptographic engines simulating secp256k1 elliptic curve Diffie-Hellman key derivation, keccak256 hashing, and Groth16 zk-SNARK proof data structures (pi_a, pi_b, pi_c, public
+  signals)
+  • Package Manager & Build Tools: pnpm, Turbopack, ESLint
+  ──────
+  ### 3. System Components / Modules
+  • Architecture Explainer & Landing Module (/rwa-privacy, /): Educational landing page showcasing public chain exposure vectors, interactive side-by-side transaction inspections, and architectural diagrams.
+  • Interactive Protocol Console (/rwa-privacy/demo): Multi-step state machine orchestrating the four-stage RWA privacy lifecycle.
+  • Asset Registration Module (AssetForm): Interface for entering real-world asset attributes (name, category, valuation, initial owner) and committing them to the public ledger.
+  • Stealth Address Derivation Engine (StealthAddressPanel): Cryptographic derivation unit generating recipient spending/viewing keys, ephemeral key pairs, and unlinkable one-time stealth addresses.
+  • Transaction Execution & Ledger Explorer (TransactionPanel, MockLedgerTable): Transaction composer, network propagation simulator, and block explorer table displaying public vs. private states.
+  • Zero-Knowledge Prover & Verifier (ZKProofPanel):
+      • Prover Submodule: Compiles witness data and synthesizes zero-knowledge proofs.
+      • Verifier Submodule: Validates mathematical integrity against public signals and evaluates tampered proofs.
+  • Shared UI & Utility System: Custom neo-brutalist buttons, cards, badges, alert boxes, and percentage-based progressive loaders.
+  ──────
+  ### 4. Data Flow
+  1. Asset Registration:
+      • The user inputs asset parameters (name, asset class, valuation, owner).
+      • The system computes a unique asset identifier, derives the owner's public address, and generates a block transaction hash.
+      • State is committed and displayed on the public ledger with the owner's identity fully exposed.
+  2. Stealth Key & Address Derivation:
+      • The user requests a stealth transfer bundle for the recipient.
+      • The engine derives a viewing key and spending key, samples ephemeral entropy to produce an ephemeral key pair, and performs an elliptic curve Diffie-Hellman exchange to generate a one-time stealth destination address.
+      • The stealth address is decoupled from the recipient's original address.
+  3. Confidential Transfer Execution:
+      • The user executes the transfer from the original owner to the derived stealth address.
+      • The system animates mempool submission, gossip network propagation, and block finalization.
+      • The public ledger state is updated: ownership shifts to the stealth address with no link to the real recipient.
+  4. Zero-Knowledge Proof & Verification:
+      • The prover takes the recipient's private spending key, stealth address, and asset ID as private witness inputs.
+      • A Groth16 zk-SNARK proof object (pi_a, pi_b, pi_c, public signals) is generated.
+      • The verifier ingests the proof and public signals, checks proof integrity, and outputs a binary validation result (Valid or Invalid).
+
+  ──────
+  ### 5. User Roles
+
+  • Asset Issuer / Current Owner (Alice): Enters real-world asset details, issues tokens onto the ledger, and initiates transfers.
+  • Recipient / Private Asset Holder (Bob): Holds spending and viewing keys, receives the asset at a one-time stealth address, and generates ZK proofs to assert ownership.
+  • Verifier / Compliance Auditor: Validates zero-knowledge ownership attestations against public ledger records without learning the owner's real identity.
+  • On-Chain Observer / Surveillance Adversary: Scans the public block explorer; can view transaction values and stealth addresses, but cannot identify or link the real owner.
+  ──────
+  ### 6. Key Processes / Workflows
+
+  • Workflow 1: RWA Tokenization & Public Exposure Baseline
+      1. User fills out asset details (Real Estate, Bond, Equity, or Commodity) and assigns an owner.
+      2. System runs title validation, compliance rule initialization, and block mining.
+      3. Public ledger records and displays the unshielded asset holding, demonstrating the baseline privacy flaw of public blockchains.
+  • Workflow 2: Non-Interactive Stealth Address Generation
+      1. Recipient generates a dual-key pair (spending key and viewing key).
+      2. Sender generates an ephemeral secret and computes an ephemeral public key.
+      3. System computes the shared secret and blinds the recipient's spending key into a unique one-time stealth address.
+      4. Visual diff confirms that the stealth address shares no on-chain link with the recipient's public address.
+  • Workflow 3: Private Transfer & Zero-Knowledge Ownership Attestation
+      1. Transfer transaction is submitted and confirmed on-chain, reassigning asset ownership to the stealth address.
+      2. Public blockchain explorer displays the stealth address holding the asset without revealing the recipient's identity.
+      3. Recipient generates a Groth16 zk-SNARK proof using their spending key and asset ID.
+      4. Verifier tests the proof against public signals and outputs a valid verification status (or catches tampered signals when simulated tampering is toggled).
+
+  ──────
+  ### 7. External Integrations
+
+  • Cryptographic & Protocol Standards Modeled:
+      • ERC-5564: Stealth Address standard for non-interactive address derivation.
+      • ERC-3643: Permissioned Real World Asset compliance rules.
+      • Groth16 zk-SNARK / BN254: Pairing-friendly zero-knowledge proof format.
+      • secp256k1: Elliptic curve standard for key derivation.
+  • Typography Services: Google Fonts CDN for Space Grotesk and IBM Plex Mono fonts.
+  • Hosting & Runtime: Next.js App Router runtime on Linux/Vercel.
+  (Note: To guarantee self-contained execution and deterministic educational inspection, cryptographic math and ledger states operate client-side without third-party wallet extensions or external RPC node dependencies).
+  ──────
+  ### 8. Entry & Exit Points
+
+  • Entry Points:
+      • Landing / Overview Page (/ and /rwa-privacy): User entry to examine the privacy challenge, comparative architecture, and exposed ledger transactions.
+      • Protocol Console (/rwa-privacy/demo): Interactive entry points triggered by user actions including asset registration submission, stealth bundle generation, transfer execution, proof generation, tamper toggling, and
+      verification execution.
+  • Exit Points & Final Outputs:
+      • Updated Ledger State: Confirmed transaction record reassigning the asset to the one-time stealth address.
+      • Unlinkable Public Signals: Block explorer output demonstrating proof of settlement with complete identity concealment.
+      • Verified Ownership Assertion: Binary cryptographic confirmation (Valid / Invalid) certifying that the prover controls the asset without revealing their identity or private keys.
